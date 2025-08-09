@@ -1,9 +1,3 @@
-Criei o `README.md` detalhado para o seu backend, seguindo suas instruções. Ele explica a configuração, as variáveis de ambiente, a inicialização do banco de dados e os endpoints da API.
-
------
-
-### `README.md`
-
 # Simulador de Votos para Mídias (Backend)
 
 Este é o backend da aplicação de um simulador de votos para filmes e séries, construído com **Node.js**, **Express** e **PostgreSQL**. A API gerencia a criação, listagem e votação de mídias, além da autenticação de usuários.
