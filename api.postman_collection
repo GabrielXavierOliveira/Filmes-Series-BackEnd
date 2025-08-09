@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "62b0a3f8-2a9a-4989-9d33-92da0d5e1660",
+		"name": "Filmes & Series",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47470338",
+		"_collection_link": "https://gabrielxavieroliveira-8977663.postman.co/workspace/Gabriel-Xavier-Oliveira's-Works~fba5f8de-251a-44a3-83e6-0e119b3a0437/collection/47470338-62b0a3f8-2a9a-4989-9d33-92da0d5e1660?action=share&source=collection_link&creator=47470338"
+	},
+	"item": [
+		{
+			"name": "Filme & Serie",
+			"item": [
+				{
+					"name": "Listar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJ4YXZpZXIiLCJpYXQiOjE3NTQ3NzM1MTgsImV4cCI6MTc1NDc3NzExOH0.gBSFL-mAxklRB3_t_9-m2P-GuJK2R4k1mqx4Dhzzeks",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/Medias?titulo=a",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Medias"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": "a"
+								}
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Exibir por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJ4YXZpZXIiLCJpYXQiOjE3NTQ3NzczNzksImV4cCI6MTc1NDc4MDk3OX0.5BLt_3Cwvh-IBgCgospsrzc2EyGnQjWcW-dzb2mrWQU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/Medias/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Medias",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJ4YXZpZXIiLCJpYXQiOjE3NTQ3NzczNzksImV4cCI6MTc1NDc4MDk3OX0.5BLt_3Cwvh-IBgCgospsrzc2EyGnQjWcW-dzb2mrWQU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Star Wars: Episódio IV\",\r\n  \"descricao\": \"Uma nova esperança para a galáxia.\",\r\n  \"genero\": [\"Ficção Científica\", \"Aventura\"],\r\n  \"imagem_url\": \"https://tse2.mm.bing.net/th/id/OIP.1S1SHwdDj885yLu_KjJZkQHaLH?rs=1&pid=ImgDetMain&o=7&rm=3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Medias",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Medias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJ4YXZpZXIiLCJpYXQiOjE3NTQ3NzczNzksImV4cCI6MTc1NDc4MDk3OX0.5BLt_3Cwvh-IBgCgospsrzc2EyGnQjWcW-dzb2mrWQU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"descricao\": \"Neo Morre\",\r\n  \"genero\": [\"Ação\", \"Ficção Científica\", \"Aventura\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Medias/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Medias",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Votos",
+			"item": [
+				{
+					"name": "Exibir Contagem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJ4YXZpZXIiLCJpYXQiOjE3NTQ3NzczNzksImV4cCI6MTc1NDc4MDk3OX0.5BLt_3Cwvh-IBgCgospsrzc2EyGnQjWcW-dzb2mrWQU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/Votos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Votos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Votar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJ4YXZpZXIiLCJpYXQiOjE3NTQ3NzczNzksImV4cCI6MTc1NDc4MDk3OX0.5BLt_3Cwvh-IBgCgospsrzc2EyGnQjWcW-dzb2mrWQU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"usuarioId\": 1, \"mediaId\": 3, \"reacao\": true }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Votos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Votos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover Voto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJ4YXZpZXIiLCJpYXQiOjE3NTQ3NzczNzksImV4cCI6MTc1NDc4MDk3OX0.5BLt_3Cwvh-IBgCgospsrzc2EyGnQjWcW-dzb2mrWQU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"usuarioId\": 1, \"mediaId\": 3 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Votos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Votos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\":\"usuario\",\r\n    \"senha\":\"senha\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Auth/Login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Auth",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\":\"usuario\",\r\n    \"senha\":\"senha\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Auth/Registro",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Auth",
+								"Registro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
