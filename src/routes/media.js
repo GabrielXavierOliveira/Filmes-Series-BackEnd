@@ -2,20 +2,15 @@ const express = require('express');
 const mediaDAO = require('../DAO/mediaDAO');
 const router = express.Router();
 
-const products = [
-  { id: 1, name: 'Resgate' },
-  { id: 2, name: 'Miranha' },
-];
-
-router.get('/', async (req, res) => {
+router.get('/', async (req, res) => { //realiza busca de filmes e séries
     const filters = {
-    titulo: req.query.titulo,
-    genero: req.query.genero,
+    titulo: req.query.titulo, //permite busca por titulo através de parametro na url
+    genero: req.query.genero, //permite busca por generos através de parametro na url
   };
   
   const options = {
-    orderBy: req.query.orderBy,
-    orderDirection: req.query.orderDirection,
+    orderBy: req.query.orderBy, //permite ordenar os resultados
+    orderDirection: req.query.orderDirection, //permite alterar a ordenação
   };
   try {
     const medias = await mediaDAO.findMedias(filters, options);
@@ -24,7 +19,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Erro ao buscar filmes ou series' });
   }
 });
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => { //busca filme ou série especifico por ID
   const mediaId = parseInt(req.params.id);
 
   if (isNaN(mediaId)) {
@@ -44,15 +39,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res) => { //Realiza novo cadastro de filme ou serie
   const { titulo, descricao, genero, imagem_url } = req.body;
 
   if (!titulo || !genero || !imagem_url) {
-    return res.status(400).json({ error: 'Título, gênero e imagem_url são obrigatórios.' });
+    return res.status(400).json({ error: 'Título, gênero e imagem_url são obrigatórios.' }); //valida a estrutura do corpo da requisição
   }
   
   if (!Array.isArray(genero)) {
-    return res.status(400).json({ error: 'O gênero deve ser um array de strings.' });
+    return res.status(400).json({ error: 'O gênero deve ser um array de strings.' }); //Verifica a integridade do array de generos
   }
 
   const newMediaData = {
@@ -70,7 +65,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => { //Altera cadastro de Filme ou Serie
   const mediaId = parseInt(req.params.id);
 
   if (isNaN(mediaId)) {
@@ -80,11 +75,11 @@ router.put('/:id', async (req, res) => {
   const updateData = req.body;
 
   if (Object.keys(updateData).length === 0) {
-    return res.status(400).json({ error: 'Corpo da requisição vazio. Nenhum dado para atualizar.' });
+    return res.status(400).json({ error: 'Corpo da requisição vazio. Nenhum dado para atualizar.' }); //Verifica se existe algum dado valido para alteração
   }
 
   if (updateData.genero && !Array.isArray(updateData.genero)) {
-    return res.status(400).json({ error: 'O gênero deve ser um array de strings.' });
+    return res.status(400).json({ error: 'O gênero deve ser um array de strings.' }); //Verifica a integridade do array de generos
   }
 
   try {

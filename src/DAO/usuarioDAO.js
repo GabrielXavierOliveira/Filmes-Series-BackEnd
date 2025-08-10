@@ -1,6 +1,7 @@
 const db = require('../handler/database');  
 
 /**
+ * Realiza busca de usuário pelo login
  * @param {string} login
  * @returns {Promise<Object|null>} 
  */
@@ -10,7 +11,7 @@ async function findByLogin(login) {
 
   try {
     const { rows } = await db.query(query, params);
-    return rows[0] || null;
+    return rows[0] || null; //Retorna usuário encontrado ou null se não tiver usuário válido
   } catch (error) {
     console.error('Erro ao buscar usuário por login:', error);
     throw error;
@@ -18,6 +19,7 @@ async function findByLogin(login) {
 }
 
 /**
+ * Realiza cadastro de novo usuário
  * @param {string} login
  * @param {string} senha
  * @returns {Promise<Object>}

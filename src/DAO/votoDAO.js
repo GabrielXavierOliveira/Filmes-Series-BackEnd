@@ -31,7 +31,7 @@ async function getVotosTotais() {
   }
 }
 /**
- * Busca a reação de um usuário para uma mídia específica.
+ * Busca a reação de um usuário para um filme ou série específico.
  * @param {number} usuarioId - O ID do usuário.
  * @param {number} mediaId - O ID da mídia.
  * @returns {Promise<boolean|null>} A reação (true para positivo, false para negativo) ou null se não houver voto.
@@ -55,6 +55,7 @@ async function getReacaoDoUsuario(usuarioId, mediaId) {
   }
 }
 /**
+ * Realiza o voto do usuário em filme ou série especifico.
  * @param {number} usuarioId 
  * @param {number} mediaId
  * @param {boolean} reacao
@@ -69,7 +70,7 @@ async function votar(usuarioId, mediaId, reacao) {
   const checkParams = [usuarioId, mediaId];
 
   try {
-    const { rows } = await db.query(checkQuery, checkParams);
+    const { rows } = await db.query(checkQuery, checkParams); //verifica se o usuário já votou no filme ou série selecionado
 
     if (rows.length > 0) {
       const updateQuery = `
@@ -79,7 +80,7 @@ async function votar(usuarioId, mediaId, reacao) {
         RETURNING *;
       `;
       const updateParams = [reacao, usuarioId, mediaId];
-      const result = await db.query(updateQuery, updateParams);
+      const result = await db.query(updateQuery, updateParams); //Se o usuário já votou, atualiza o voto dele
       console.log(`Voto atualizado: usuário ${usuarioId} na mídia ${mediaId}.`);
       return result.rows[0];
     } else {
@@ -89,7 +90,7 @@ async function votar(usuarioId, mediaId, reacao) {
         RETURNING *;
       `;
       const insertParams = [usuarioId, mediaId, reacao];
-      const result = await db.query(insertQuery, insertParams);
+      const result = await db.query(insertQuery, insertParams); //Se o usuário não tiver votado, realiza novo voto
       console.log(`Novo voto registrado: usuário ${usuarioId} na mídia ${mediaId}.`);
       return result.rows[0];
     }
@@ -100,6 +101,7 @@ async function votar(usuarioId, mediaId, reacao) {
 }
 
 /**
+ * Remove o voto do usuário em filme ou série especifico.
  * @param {number} usuarioId
  * @param {number} mediaId
  * @returns {Promise<boolean>}

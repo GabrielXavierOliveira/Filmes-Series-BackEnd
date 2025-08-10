@@ -64,10 +64,10 @@ async function setupDatabase() {
   try {
     console.log('Verificando e criando as estruturas do banco de dados...');
 
-    const mediasTableCheck = await db.query(`SELECT to_regclass('public.medias');`);
+    const mediasTableCheck = await db.query(`SELECT to_regclass('public.medias');`); //Query para verificar se a tabela de filmes e series existe
     const tableExists = mediasTableCheck.rows[0].to_regclass !== null;
 
-    if (!tableExists) {
+    if (!tableExists) { //Se não existe, cria a tabela e adiciona 5 filmes de exemplo
       console.log('Tabela medias não existe. Criando...');
       await db.query(createMediasTableQuery);
       
@@ -91,9 +91,9 @@ async function setupDatabase() {
     await db.query(createVotosTableQuery);
     console.log('Tabela de votos criada com sucesso!');
     
-    const adminUser = await db.query('SELECT id FROM usuarios WHERE login = $1', ['admin']);
+    const adminUser = await db.query('SELECT id FROM usuarios WHERE login = $1', ['admin']); //verifica se existe usuario admin criado
     if (adminUser.rows.length === 0) {
-      await db.query('INSERT INTO usuarios (login, senha) VALUES ($1, $2)', ['admin', 'admin']);
+      await db.query('INSERT INTO usuarios (login, senha) VALUES ($1, $2)', ['admin', 'admin']); //se não existe, cria novo usuario
       console.log('Usuário "admin" criado com a senha "admin".');
     } else {
       console.log('Usuário "admin" já existe.');

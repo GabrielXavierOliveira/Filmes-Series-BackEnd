@@ -8,11 +8,13 @@ const db = require('../handler/database');
 
 
 /**
- * @param {Object} filters
- * @param {Object} options
+ * Realiza busca de filmes e séries cadastrados
+ * @param {Object} filters //Filtros de Busca
+ * @param {Object} options //Opções de ordenação
  * @returns {Promise<Array>} 
  */
 async function findMedias(filters = {}, options = {}) {
+  //A query permite a busca de filmes e séries, contabilizando votos positivos e negativos
   let query = `    
         SELECT 
             m.*,
@@ -21,8 +23,8 @@ async function findMedias(filters = {}, options = {}) {
             FROM medias AS m
             LEFT JOIN votos AS v ON m.id = v.media_id
         `;
-  const params = [];
-  const clauses = [];
+  const params = [];//Recebe os paramatros da URL 
+  const clauses = [];//Define as clausulas de busca SQL
   if (filters.titulo) {
     clauses.push(`titulo ILIKE $${params.length + 1}`);
     params.push(`%${filters.titulo}%`);
@@ -39,9 +41,9 @@ async function findMedias(filters = {}, options = {}) {
   }
   query += ` GROUP BY m.id`;
 
-  if (options.orderBy) {
+  if (options.orderBy) { //Valida se os ordenadores aplicados são validos
     const allowedColumns = ['id', 'titulo', 'descricao', 'genero','votos_positivos', 'votos_negativos'];
-    if (allowedColumns.includes(options.orderBy)) {
+    if (allowedColumns.includes(options.orderBy)) {//Valida se a ordenação é uma opção valida
       const direction = options.orderDirection?.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
       query += ` ORDER BY ${options.orderBy} ${direction}`;
     }
@@ -60,7 +62,7 @@ async function findMedias(filters = {}, options = {}) {
  * @returns {Promise<Object|null>}
  */
 async function findById(id) {
-  // A query é a mesma do findMedias, mas com um filtro WHERE id = $1
+  // A query é a mesma do findMedias, mas com um filtro WHERE id = $1 para encontrar filme ou série especifico
   const query = `
     SELECT
       m.*,
@@ -83,6 +85,7 @@ async function findById(id) {
   }
 }
 /**
+ * Realiza Registro de novo filme ou série
  * @param {Object} mediaData
  * @param {string} mediaData.titulo
  * @param {string} mediaData.descricao
@@ -103,7 +106,6 @@ async function createMedia(mediaData) {
 
   try {
     const { rows } = await db.query(query, params);
-    // O driver 'pg' já converte o JSON do banco para um objeto JavaScript
     return rows[0]; 
   } catch (error) {
     console.error('Erro ao criar mídia:', error);
@@ -111,6 +113,8 @@ async function createMedia(mediaData) {
   }
 }
 /**
+ * Realiza update de filme ou série cadastrado
+ * NÃO UTILIZADO
  * @param {number} id
  * @param {Object} updateData
  * @param {string} [updateData.titulo]

@@ -2,7 +2,7 @@ const express = require('express');
 const votoDAO = require('../DAO/votoDAO')
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res) => {//total de votos contabilizados
   try {
     const totais = await votoDAO.getVotosTotais();
     res.json(totais);
@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Erro ao obter totais de votos.' });
   }
 });
-router.get('/reacao/:mediaId', async (req, res) => {
+router.get('/reacao/:mediaId', async (req, res) => {//verifica qual o voto do usuario para o filme ou serie
   const { mediaId } = req.params;
   const usuarioId = req.user.id;
 
@@ -22,12 +22,12 @@ router.get('/reacao/:mediaId', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res) => {//realiza voto do usuario
   const {  mediaId, reacao } = req.body;
   const usuarioId = req.user.id;
 
   if (!usuarioId || !mediaId || typeof reacao !== 'boolean') {
-    return res.status(400).json({ error: 'Dados do voto inválidos. mediaId e reacao (true/false) são obrigatórios.' });
+    return res.status(400).json({ error: 'Dados do voto inválidos. mediaId e reacao (true/false) são obrigatórios.' }); //validação de estrutura da requisição
   }
 
   try {
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.delete('/', async (req, res) => {
+router.delete('/', async (req, res) => {//remove voto de usuário
   const { usuarioId, mediaId } = req.body;
 
   if (!usuarioId || !mediaId) {
