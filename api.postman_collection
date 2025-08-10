@@ -40,7 +40,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/Medias?titulo=a",
+							"raw": "{{baseURL}}/Medias?titulo=Matrix&descricao=Neo&genero=Fantasia&orderBy=titulo",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -50,7 +50,21 @@
 							"query": [
 								{
 									"key": "titulo",
-									"value": "a"
+									"value": "Matrix",
+									"description": "Busca por titulo"
+								},
+								{
+									"key": "descricao",
+									"value": "Neo",
+									"description": "Busca pela descrição"
+								},
+								{
+									"key": "genero",
+									"value": "Fantasia"
+								},
+								{
+									"key": "orderBy",
+									"value": "titulo"
 								}
 							]
 						},
