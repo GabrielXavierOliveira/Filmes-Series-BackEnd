@@ -23,10 +23,11 @@ router.get('/reacao/:mediaId', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { usuarioId, mediaId, reacao } = req.body;
+  const {  mediaId, reacao } = req.body;
+  const usuarioId = req.user.id;
 
   if (!usuarioId || !mediaId || typeof reacao !== 'boolean') {
-    return res.status(400).json({ error: 'Dados do voto inválidos. usuarioId, mediaId e reacao (true/false) são obrigatórios.' });
+    return res.status(400).json({ error: 'Dados do voto inválidos. mediaId e reacao (true/false) são obrigatórios.' });
   }
 
   try {
