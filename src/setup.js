@@ -32,7 +32,7 @@ const exemploMedias = [
     titulo: 'Interestelar',
     descricao: 'Exploradores espaciais viajam através de um buraco de minhoca.',
     genero: ['Ficção Científica', 'Drama'],
-    imagem_url: 'https://image.tmdb.org/t/p/original/g4H3W2g8v76zR1BvLqj1k5RjQfD.jpg'
+    imagem_url: 'https://ingresso-a.akamaihd.net/img/cinema/cartaz/4238-cartaz.jpg'
   },
   {
     titulo: 'Matrix',
@@ -48,7 +48,7 @@ const exemploMedias = [
   },
   {
     titulo: 'Vingadores',
-    descricao: 'Um pequeno leão é obrigado por seu tío a fugir de casa e anos depois se da conta da sua identidade e suas responsabilidades.',
+    descricao: 'Um grupo com os maiores heróis da Terra é formado com o intuito de combater uma ameaça espacial que pode por em risco toda a raça humana.',
     genero: ['Ação', 'Aventura', 'Ficção Científica'],
     imagem_url: 'https://www.themoviedb.org/t/p/original/j9hwS307Zlc5mQTbAnwV75vXG0H.jpg'
   },
